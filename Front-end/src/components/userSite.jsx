@@ -18,6 +18,10 @@ const UserSite = () => {
       >
         Hente antal bruger
       </button>
+
+      <p>
+        Her skal der vises en kalender.
+      </p>
     </>
   );
 };
