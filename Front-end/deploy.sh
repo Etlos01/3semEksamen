@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-XXXX="Calendar"
+XXXX="calendar"
 DROPLET_URL="165.232.67.35"
 
 echo "##############################"
