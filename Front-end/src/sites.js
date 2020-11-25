@@ -1,7 +1,9 @@
-export const Site = "http://localhost:8080/jpareststarter";
+export const Site = "http://localhost:8080/calendar/api/"; //Deployed maximapps.com
 
-export const AdminUrlUserCount = "http://localhost:8080/jpareststarter/api/admin/userCount";
+export const AdminUrlUserCount = Site + "admin/userCount";
 
-export const UserUrlUserCount = "http://localhost:8080/jpareststarter/api/user/userCount"
+export const UserUrlUserCount = Site + "user/userCount";
 
-export const DailyFunUrl = "http://localhost:8080/jpareststarter/api/dailyfun";
+export const DailyFunUrl = Site + "dailyfun";
+
+export const AddUserURL = Site + "user";
