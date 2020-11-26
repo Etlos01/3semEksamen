@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
@@ -35,6 +36,8 @@ public class User implements Serializable {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
+    @ManyToMany(mappedBy = "userList")
+    private List<Calendar> calendarList = new ArrayList<>();
 
     public List<String> getRolesAsStrings() {
         if (roleList.isEmpty()) {
@@ -87,6 +90,22 @@ public class User implements Serializable {
 
     public void addRole(Role userRole) {
         roleList.add(userRole);
+    }
+
+    @XmlTransient
+    public List<Calendar> getCalendarList() {
+        return calendarList;
+    }
+
+    public void setCalendarList(List<Calendar> calendarList) {
+        this.calendarList = calendarList;
+    }
+
+    public void addCalendar(Calendar calendar) {
+        if (calendar != null) {
+            this.calendarList.add(calendar);
+            calendar.getUserList().add(this);
+        }
     }
 
 }
