@@ -24,7 +24,7 @@ public class CalendarFacade {
      * @param _emf
      * @return the instance of this facade.
      */
-    public static CalendarFacade getUserFacade(EntityManagerFactory _emf) {
+    public static CalendarFacade getCalendarFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new CalendarFacade();
