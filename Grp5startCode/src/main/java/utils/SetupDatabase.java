@@ -8,6 +8,10 @@ package utils;
 import entities.Role;
 //pending implementation...
 //import entities.Category;
+import entities.Holiday;
+import dtos.HolidayDTO;
+import java.io.IOException;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -17,15 +21,18 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SetupDatabase {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        //Fetch Holidays from foreign API and persist in database.
+        setupHolidays();
 
         //pending implementation...
         //setupCategories();
-        
         //not planned yet 
         //setupRoles();
     }
 
+    //use this on a clean database, to populate Roles
     private static void setupRoles() {
 
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
@@ -44,6 +51,24 @@ public class SetupDatabase {
         em.getTransaction().commit();
     }
 
+    private static void setupHolidays() throws IOException {
+
+        Collection<HolidayDTO> holidays = new facades.DataFetcherFacade().getHolidaysDTO();
+
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        for (HolidayDTO h : holidays) {
+
+            em.persist(new Holiday(h));
+        }
+
+        em.getTransaction().commit();
+    }
+
+    //use this on a clean database, to populate Categories
 //    private static void setupEventCategories() {
 //
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
@@ -64,5 +89,4 @@ public class SetupDatabase {
 //        em.getTransaction().commit();
 //
 //    }
-
 }
