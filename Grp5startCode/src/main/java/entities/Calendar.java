@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -49,13 +50,13 @@ public class Calendar implements Serializable {
         @JoinColumn(name = "calendar_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_user_name", referencedColumnName = "user_name")})
     @ManyToMany
-    private List<User> userList;
+    private List<User> userList = new ArrayList<>();
+
 //    @JoinTable(name = "calendar_events", joinColumns = {
 //        @JoinColumn(name = "calendar_id", referencedColumnName = "id")}, inverseJoinColumns = {
 //        @JoinColumn(name = "event_id", referencedColumnName = "id")})
 //    @ManyToMany
 //    private List<Event> eventList;
-
     public Calendar() {
     }
 
@@ -103,5 +104,4 @@ public class Calendar implements Serializable {
 //            event.getCalendarList().add(this);
 //        }
 //    }
-
 }
