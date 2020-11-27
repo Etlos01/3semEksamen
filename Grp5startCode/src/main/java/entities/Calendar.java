@@ -37,15 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Calendar.findByTitle", query = "SELECT c FROM Calendar c WHERE c.title = :title")})
 public class Calendar implements Serializable {
 
+    @Size(max = 125)
+    @Column(name = "title")
+    private String title;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 125)
-    @Column(name = "title")
-    private String title;
     @JoinTable(name = "user_calendars", joinColumns = {
         @JoinColumn(name = "calendar_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_user_name", referencedColumnName = "user_name")})
@@ -72,13 +73,6 @@ public class Calendar implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @XmlTransient
     public List<User> getUserList() {
@@ -104,4 +98,12 @@ public class Calendar implements Serializable {
 //            event.getCalendarList().add(this);
 //        }
 //    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

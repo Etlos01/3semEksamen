@@ -5,6 +5,7 @@
  */
 package facades;
 
+import dtos.EventDTO;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -30,6 +31,10 @@ public class EventFacade {
             instance = new EventFacade();
         }
         return instance;
+    }
+
+    public EventDTO addEvent(EventDTO e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
