@@ -9,6 +9,7 @@ import dtos.HolidayDTO;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,13 @@ public class Holiday implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Column(name = "date")
     private String date;
+    @Column(name = "name")
     private String name;
+    @Column(name = "localName")
     private String localName;
+    @Column(name = "countryCode")
     private String countryCode;
 
     public Holiday() {

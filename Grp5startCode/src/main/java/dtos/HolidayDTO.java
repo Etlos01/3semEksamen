@@ -5,7 +5,9 @@
  */
 package dtos;
 
-import java.util.Date;
+import entities.Holiday;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,18 +19,26 @@ public class HolidayDTO {
     String name;
     String localName;
     String countryCode;
+    List<HolidayDTO> allHolidays = new ArrayList();
 
     public HolidayDTO(String date, String localName, String name, String countryCode) {
         this.date = date;
         this.name = name;
+        this.localName = localName;
         this.countryCode = countryCode;
     }
 
-    public HolidayDTO(HolidayDTO h) {
-        this.date = h.date;
-        this.name = h.name;
-        this.localName = h.localName;
-        this.countryCode = h.countryCode;
+    public HolidayDTO(Holiday h) {
+        this.date = h.getDate();
+        this.name = h.getName();
+        this.localName = h.getLocalName();
+        this.countryCode = h.getCountryCode();
+    }
+    
+    public HolidayDTO(List<Holiday> h){
+        h.forEach((hDTO) -> {
+            allHolidays.add(new HolidayDTO(hDTO));
+        });
     }
 
     public String getDate() {
