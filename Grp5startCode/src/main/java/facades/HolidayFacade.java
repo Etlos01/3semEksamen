@@ -31,18 +31,17 @@ public class HolidayFacade {
         }
         return instance;
     }
-    
+
     public HolidayDTO getHolidays() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Holiday> q = em.createQuery("SELECT h FROM holidays h", Holiday.class);
-                    return new HolidayDTO(q.getResultList());
-                    
-        } finally{
+            TypedQuery<Holiday> q = em.createQuery("SELECT h FROM Holiday h", Holiday.class);
+            return new HolidayDTO(q.getResultList());
+
+        } finally {
             em.close();
         }
-        
-        
+
     }
 
 }
