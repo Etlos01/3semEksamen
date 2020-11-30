@@ -53,11 +53,12 @@ public class Calendar implements Serializable {
     @ManyToMany
     private List<User> userList = new ArrayList<>();
 
-//    @JoinTable(name = "calendar_events", joinColumns = {
-//        @JoinColumn(name = "calendar_id", referencedColumnName = "id")}, inverseJoinColumns = {
-//        @JoinColumn(name = "event_id", referencedColumnName = "id")})
-//    @ManyToMany
-//    private List<Event> eventList;
+    @JoinTable(name = "calendar_events", joinColumns = {
+        @JoinColumn(name = "calendar_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "event_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Event> eventList;
+    
     public Calendar() {
     }
 
@@ -83,21 +84,21 @@ public class Calendar implements Serializable {
         this.userList = userList;
     }
 
-//    @XmlTransient
-//    public List<Event> getEventList() {
-//        return eventList;
-//    }
-//
-//    public void setEventList(List<Event> eventList) {
-//        this.eventList = eventList;
-//    }
-//    
-//    public void addEvent(Event event){
-//        if(event != null){
-//            this.eventList.add(event);
-//            event.getCalendarList().add(this);
-//        }
-//    }
+    @XmlTransient
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
+    
+    public void addEvent(Event event){
+        if(event != null){
+            this.eventList.add(event);
+            event.getCalendarList().add(this);
+        }
+    }
 
     public String getTitle() {
         return title;

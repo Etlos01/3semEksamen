@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categories.findAll", query = "SELECT c FROM Categories c"),
     @NamedQuery(name = "Categories.findByName", query = "SELECT c FROM Categories c WHERE c.name = :name")})
-public class Categories implements Serializable {
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,12 +40,12 @@ public class Categories implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "category")
-    private List<Events> eventsList;
+    private List<Event> eventsList;
 
-    public Categories() {
+    public Category() {
     }
 
-    public Categories(String name) {
+    public Category(String name) {
         this.name = name;
     }
 
@@ -58,11 +58,11 @@ public class Categories implements Serializable {
     }
 
     @XmlTransient
-    public List<Events> getEventsList() {
+    public List<Event> getEventsList() {
         return eventsList;
     }
 
-    public void setEventsList(List<Events> eventsList) {
+    public void setEventsList(List<Event> eventsList) {
         this.eventsList = eventsList;
     }
 
@@ -76,10 +76,10 @@ public class Categories implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categories)) {
+        if (!(object instanceof Category)) {
             return false;
         }
-        Categories other = (Categories) object;
+        Category other = (Category) object;
         if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }

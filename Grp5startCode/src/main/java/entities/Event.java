@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,8 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Events.findByStop", query = "SELECT e FROM Events e WHERE e.stop = :stop"),
     @NamedQuery(name = "Events.findByTitle", query = "SELECT e FROM Events e WHERE e.title = :title"),
     @NamedQuery(name = "Events.findByFullday", query = "SELECT e FROM Events e WHERE e.fullday = :fullday")})
-public class Events implements Serializable {
-
+public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,12 +64,14 @@ public class Events implements Serializable {
     private Boolean fullday;
     @JoinColumn(name = "category", referencedColumnName = "name")
     @ManyToOne
-    private Categories category;
+    private Category category;
+    @ManyToMany(mappedBy = "eventsList")
+    private List<Calendar> calendarList;
 
-    public Events() {
+    public Event() {   
     }
 
-    public Events(Integer id) {
+    public Event(Integer id) {
         this.id = id;
     }
 
@@ -86,6 +90,24 @@ public class Events implements Serializable {
     public void setCalendarId(Integer calendarId) {
         this.calendarId = calendarId;
     }
+
+
+    public Boolean getFullday() {
+        return fullday;
+    }
+
+    public void setFullday(Boolean fullday) {
+        this.fullday = fullday;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 
     public String getInfo() {
         return info;
@@ -119,45 +141,13 @@ public class Events implements Serializable {
         this.title = title;
     }
 
-    public Boolean getFullday() {
-        return fullday;
+    @XmlTransient
+    public List<Calendar> getCalendarList() {
+        return calendarList;
     }
 
-    public void setFullday(Boolean fullday) {
-        this.fullday = fullday;
-    }
-
-    public Categories getCategory() {
-        return category;
-    }
-
-    public void setCategory(Categories category) {
-        this.category = category;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Events)) {
-            return false;
-        }
-        Events other = (Events) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entities.Events[ id=" + id + " ]";
+    public void setCalendarList(List<Calendar> calendarList) {
+        this.calendarList = calendarList;
     }
     
 }

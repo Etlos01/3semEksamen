@@ -5,7 +5,7 @@
  */
 package dtos;
 
-import entities.Events;
+import entities.Event;
 
 
 
@@ -31,7 +31,7 @@ public class EventDTO {
         this.isAllDay = isAllDay;
     }
     
-    public EventDTO(Events e){
+    public EventDTO(Event e){
         this.title = e.getTitle();
         this.startDate = e.getStart();
         this.endDate = e.getStop();
