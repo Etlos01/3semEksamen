@@ -40,8 +40,6 @@ public class EventFacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    //SELECT b, p FROM Book b, Publisher p WHERE b.fk_publisher = p.id
-    //SELECT c1, c2 FROM Country c1 INNER JOIN c1.neighbors c2
     public EventDTO getEventsByCalendar(int calendarId) {
         EntityManager em = emf.createEntityManager();
         try {
