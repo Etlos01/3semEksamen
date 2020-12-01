@@ -6,6 +6,8 @@
 package dtos;
 
 import entities.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,6 +16,8 @@ import entities.Calendar;
 public class CalendarDTO {
     private int id;
     private String title;
+    
+    private List<HolidayDTO> holidays = new ArrayList<>();
 
     public CalendarDTO(Calendar calendar) {
         this.id = calendar.getId();
