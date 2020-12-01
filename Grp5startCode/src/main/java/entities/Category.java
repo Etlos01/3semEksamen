@@ -37,7 +37,7 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "category")
-    private List<Event> eventsList;
+    private List<Event> eventList;
 
     public Category() {
     }
@@ -55,14 +55,13 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public List<Event> getEventsList() {
-        return eventsList;
+    public List<Event> getEventList() {
+        return eventList;
     }
 
-    public void setEventsList(List<Event> eventsList) {
-        this.eventsList = eventsList;
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
-    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -9,9 +9,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.EventDTO;
 import dtos.UserDTO;
+import entities.User;
 import facades.EventFacade;
 import facades.UserFacade;
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -20,6 +25,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import utils.EMF_Creator;
 
@@ -44,10 +50,16 @@ public class EventResource {
     public EventResource() {
     }
 
-    /**
-     * Retrieves representation of an instance of rest.EventResource
-     * @return an instance of java.lang.String
-     */
+    
+    @GET
+    @Path("/{calendarId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getEventsByCalendar(@PathParam("calendarId") int calendarId) {
+        EventDTO e = FACADE.getEventsByCalendar(calendarId);
+        return GSON.toJson(e);
+    }
+    
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {

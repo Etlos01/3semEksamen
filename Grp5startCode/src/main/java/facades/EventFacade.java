@@ -10,13 +10,14 @@ import entities.Category;
 import entities.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author Nyxis
  */
 public class EventFacade {
-    
+
     private static EntityManagerFactory emf;
     private static EventFacade instance;
 
@@ -35,9 +36,7 @@ public class EventFacade {
         }
         return instance;
     }
-    
-    
-    //TODO: Events Boolean allDay attribut bliver ikke gemt i databasen
+
     public EventDTO addEvent(EventDTO e) {
         EntityManager em = emf.createEntityManager();
         //Finder category object i databasen ud fra category string i EventDTO e
@@ -57,8 +56,16 @@ public class EventFacade {
         return newE;
         
     }
-    
-    
-    
-    
+
+    public EventDTO getEventsByCalendar(int calendarId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Event> query = em.createQuery("SELECT e FROM Event e INNER JOIN e.calendarList c WHERE c.id = :c_id", Event.class);
+            query.setParameter("c_id", calendarId);
+            return new EventDTO(query.getResultList());
+        } finally {
+            em.close();
+        }
+
+    }
 }
