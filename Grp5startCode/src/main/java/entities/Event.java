@@ -30,15 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "events")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Events.findAll", query = "SELECT e FROM Events e"),
-    @NamedQuery(name = "Events.findById", query = "SELECT e FROM Events e WHERE e.id = :id"),
-    @NamedQuery(name = "Events.findByCalendarId", query = "SELECT e FROM Events e WHERE e.calendarId = :calendarId"),
-    @NamedQuery(name = "Events.findByInfo", query = "SELECT e FROM Events e WHERE e.info = :info"),
-    @NamedQuery(name = "Events.findByStart", query = "SELECT e FROM Events e WHERE e.start = :start"),
-    @NamedQuery(name = "Events.findByStop", query = "SELECT e FROM Events e WHERE e.stop = :stop"),
-    @NamedQuery(name = "Events.findByTitle", query = "SELECT e FROM Events e WHERE e.title = :title"),
-    @NamedQuery(name = "Events.findByFullday", query = "SELECT e FROM Events e WHERE e.fullday = :fullday")})
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,7 +56,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "category", referencedColumnName = "name")
     @ManyToOne
     private Category category;
-    @ManyToMany(mappedBy = "eventsList")
+    @ManyToMany(mappedBy = "eventList")
     private List<Calendar> calendarList;
 
     public Event() {   
