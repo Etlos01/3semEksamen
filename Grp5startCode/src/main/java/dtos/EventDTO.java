@@ -6,6 +6,8 @@
 package dtos;
 
 import entities.Event;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -21,6 +23,7 @@ public class EventDTO {
     private String info;
     private String category;
     private Boolean isAllDay;
+    private List<EventDTO> allEvents = new ArrayList();
 
     public EventDTO(String title, String startDate, String endDate, String info, String category, Boolean isAllDay) {
         this.title = title;
@@ -40,6 +43,12 @@ public class EventDTO {
         this.isAllDay = e.getFullday();
     }
 
+    public EventDTO(List<Event> eventList){
+        eventList.forEach((e) -> {
+            allEvents.add(new EventDTO(e));
+        });
+    }
+    
     public String getTitle() {
         return title;
     }
