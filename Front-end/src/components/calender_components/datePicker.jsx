@@ -52,7 +52,7 @@ export default function MyDatepicker() {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.id;
-    if (event.target.type === 'checkbox' && !event.target.checked) {
+    if (!target.checked) {
         setDate({
             ...date,
             [name]: value,startDate: startingDate,
@@ -75,7 +75,7 @@ console.log(date)
             <Form>
         <Form.Group>
           <Form.Label>All Day</Form.Label>
-          <Form.Check id="allDay" type="checkbox" checked={initialValue.allDay} onChange={handleChange}/>
+          <Form.Check id="allDay" type="checkbox" onChange={handleChange}/>
         </Form.Group>
           <DateTimePicker
             value={startDate}
@@ -99,7 +99,7 @@ console.log(date)
       
         <Form.Group>
           <Form.Label>Title</Form.Label>
-          <Form.Control id="title" placeholder="Enter title" />
+          <Form.Control id="title" placeholder="Enter title" onChange={handleChange} />
         </Form.Group>
       
         <Button variant="dark" type="submit">
