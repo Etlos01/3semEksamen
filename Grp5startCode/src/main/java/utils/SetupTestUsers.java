@@ -1,9 +1,11 @@
 package utils;
 
 
+import dtos.EventDTO;
 import entities.Calendar;
 import entities.Role;
 import entities.User;
+import facades.EventFacade;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,14 +16,23 @@ public class SetupTestUsers {
 
     EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
     EntityManager em = emf.createEntityManager();
+    EventFacade EVENTFACADE = EventFacade.getEventFacade(emf);
     
     User user = new User("user", "userPW");
     User admin = new User("admin", "adminPW");
     User both = new User("user_admin", "user_adminPW");
     
+    // test af calendar
     Calendar calendar1 = new Calendar();
     calendar1.setTitle("testCalendar");
     user.addCalendar(calendar1);
+    
+    // test af addEvent i EventFacaden
+    EventDTO eventDTO1 = new EventDTO("Test", "2020-11-25T12:00", "2020-11-25T13:00", "This is a test1", "Birthday", true);
+    EventDTO newEventDTO1 = EVENTFACADE.addEvent(eventDTO1);
+    EventDTO eventDTO2 = new EventDTO("Test", "2020-11-25T12:00", "2020-11-25T13:00", "This is a test2", "Birthday", true);
+    EventDTO newEventDTO2 = EVENTFACADE.addEvent(eventDTO2);
+    
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");

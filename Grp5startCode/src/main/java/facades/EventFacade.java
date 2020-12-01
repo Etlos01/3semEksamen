@@ -6,6 +6,9 @@
 package facades;
 
 import dtos.EventDTO;
+import entities.Category;
+import entities.Event;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -32,9 +35,27 @@ public class EventFacade {
         }
         return instance;
     }
-
+    
+    
+    //TODO: Events Boolean allDay attribut bliver ikke gemt i databasen
     public EventDTO addEvent(EventDTO e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        //Finder category object i databasen ud fra category string i EventDTO e
+        Category category = em.find(Category.class, e.getCategory());
+        Event event = new Event(e, category);
+        try{
+        em.getTransaction().begin();
+        em.persist(event);
+        em.getTransaction().commit();
+        } catch (Exception error) {
+            
+        } finally{
+            em.close();
+        }
+        EventDTO newE = new EventDTO(event);
+        
+        return newE;
+        
     }
     
     

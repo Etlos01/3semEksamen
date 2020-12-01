@@ -62,7 +62,7 @@ public class Category implements Serializable {
     public void setEventsList(List<Event> eventsList) {
         this.eventsList = eventsList;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

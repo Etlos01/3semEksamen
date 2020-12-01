@@ -5,6 +5,7 @@
  */
 package entities;
 
+import dtos.EventDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,7 +52,7 @@ public class Event implements Serializable {
     @Size(max = 125)
     @Column(name = "title")
     private String title;
-    @Column(name = "fullday")
+    @Column(name = "fullday", nullable = false)
     private Boolean fullday;
     @JoinColumn(name = "category", referencedColumnName = "name")
     @ManyToOne
@@ -62,6 +63,15 @@ public class Event implements Serializable {
     public Event() {   
     }
 
+    public Event(EventDTO e, Category c){
+        this.title = e.getTitle();
+        this.start = e.getStartDate();
+        this.stop = e.getEndDate();
+        this.info = e.getInfo();
+        this.category = c;
+        this.fullday = e.getIsAllDay();
+    }
+    
     public Event(Integer id) {
         this.id = id;
     }
