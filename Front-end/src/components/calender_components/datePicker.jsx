@@ -38,8 +38,8 @@ export default function MyDatepicker() {
     startDate: "",
     endDate: "",
     allDay: "",
-    category: "",
-    info: ""
+    category: "Vacation",
+    info: "hejsa"
   };
   const [date, setDate] = useState(initialValue);
 
@@ -71,7 +71,7 @@ export default function MyDatepicker() {
   const handleSubmit = (event) => {
     event.preventDefault();
     window.alert(JSON.stringify(date));
-    facade.addEvent(date.title,date.startDate, date.endDate, date.allDay);
+    facade.addEvent(date.title,date.startDate, date.endDate, date.allDay, date.category, date.info);
   }
   return (
     <>

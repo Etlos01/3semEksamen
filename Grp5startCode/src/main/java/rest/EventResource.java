@@ -85,7 +85,8 @@ public class EventResource {
     public String addEvent(String event) {
         System.out.println("start if addEvent");
         EventDTO e = GSON.fromJson(event, EventDTO.class);
-        System.out.println("eventDTO e = " + e.getFullday());
+        System.out.println("eventDTO e = " + e);
+        System.out.println("eventDTO e = " + event);
         System.out.println("eventDTO category = " + e.getCategory());
         System.out.println("security context = " + securityContext.getUserPrincipal().getName());
         String thisUser = securityContext.getUserPrincipal().getName();
