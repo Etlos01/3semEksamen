@@ -8,21 +8,26 @@ package dtos;
 import entities.User;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author Nyxis
  */
 public class UserDTO {
+
     private String fname;
     private String password;
-    
-    public UserDTO(User u){
+
+    private List<HolidayDTO> holidays = new ArrayList<>();
+
+    private static EntityManagerFactory emf;
+
+    public UserDTO(User u) {
         this.fname = u.getUserName();
         this.password = u.getUserPass();
     }
-    
-    
+
     public String getFname() {
         return fname;
     }
@@ -34,6 +39,13 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
+    public List<HolidayDTO> getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(List<HolidayDTO> holidays) {
+        this.holidays = holidays;
+    }
+
 }
