@@ -11,6 +11,8 @@ import { Holidays } from "./holiday_component/holidays";
 
 
 export default function Month() {
+  let holiday_array = Holidays();
+
   
   const appointments = [
     {
@@ -19,19 +21,14 @@ export default function Month() {
       title: "Nytårsaftensdag",
     },
   ];
-  const [data, setdata] = useState({
-    date: appointments,
-    currentDate: new Date(),
-  });
-  function PutArray() {
-    setdata({ ...data, date: JSON.stringify(Holidays()) });
-  }
+  
+ 
 
   return (
     <>
       <Paper>
-        <Scheduler data={Holidays()}>
-          <ViewState currentDate={data.currentDate} />
+        <Scheduler data={holiday_array}>
+          <ViewState currentDate={new Date()} />
           <MonthView />
           <Appointments />
         </Scheduler>

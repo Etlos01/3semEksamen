@@ -11,3 +11,5 @@ export const DailyFunUrl = Site + "dailyfun";
 export const AddUserURL = Site + "user";
 
 export const HolidayURL = Site + "holidays/all";
+
+export const EventURL = Site + "event";

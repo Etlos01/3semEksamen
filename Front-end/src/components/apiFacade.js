@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { Site } from "./../sites";
-import { AddUserURL } from "./../sites";
+import { AddUserURL, EventURL } from "./../sites";
 
 
 const URL = Site;
@@ -56,6 +56,11 @@ function ApiFacade() {
 
             })
     }
+
+    const addEvent = (title, startDate, endDate, allDay) => {
+    const options = makeOptions("POST", true, { title: title, startDate: startDate, endDate: endDate, allDay: allDay })
+    return fetch(EventURL, options);
+}
     const addUser = (user, password) => {
 
         const options = makeOptions("POST", true, { fname: user, password: password })
@@ -94,9 +99,12 @@ function ApiFacade() {
         fetchData,
         getUserName,
         getRoles,
-        addUser
+        addUser,
+        addEvent
     }
 }
+
+
 const facade = ApiFacade();
 
 

@@ -2,10 +2,10 @@ import "date-fns";
 import { useState } from "react";
 import { DateTimePicker } from "@material-ui/pickers";
 import "react-datepicker/dist/react-datepicker.css";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Form, Button } from "react-bootstrap";
+import facade from "./../apiFacade";
 function thisDate(d) {
   return (
     d.getFullYear() +
@@ -67,12 +67,17 @@ export default function MyDatepicker() {
     }
     
   };
-console.log(date)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    window.alert(JSON.stringify(date));
+    facade.addEvent(date.title,date.startDate, date.endDate, date.allDay);
+  }
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
       
-            <Form>
+            <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>All Day</Form.Label>
           <Form.Check id="allDay" type="checkbox" onChange={handleChange}/>
@@ -103,7 +108,7 @@ console.log(date)
         </Form.Group>
       
         <Button variant="dark" type="submit">
-          Add Me
+          Add Event
         </Button>
       </Form>
       </MuiPickersUtilsProvider>
