@@ -24,7 +24,7 @@ public class SetupDatabase {
         setupEventCategories();
         
         //not planned yet 
-        //setupRoles();
+//        setupRoles();
     }
 
     private static void setupRoles() {
@@ -43,6 +43,27 @@ public class SetupDatabase {
         em.persist(r3);
 
         em.getTransaction().commit();
+    }
+
+    private static void setupEventCategories() {
+
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Category c1 = new Category("Vacation");
+        Category c2 = new Category("Birthday");
+        Category c3 = new Category("Reminder");
+        Category c4 = new Category("Work appointment");
+
+        em.persist(c1);
+        em.persist(c2);
+        em.persist(c3);
+        em.persist(c4);
+
+        em.getTransaction().commit();
+
     }
 
     private static void setupEventCategories() {
