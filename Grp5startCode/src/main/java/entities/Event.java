@@ -7,6 +7,7 @@ package entities;
 
 import dtos.EventDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -63,14 +64,17 @@ public class Event implements Serializable {
     public Event() {   
     }
 
-    public Event(EventDTO e, Category c){
-        this.title = e.getTitle();
-        this.start = e.getStartDate();
-        this.stop = e.getEndDate();
-        this.info = e.getInfo();
-        this.category = c;
-        this.fullday = e.getIsAllDay();
+    public Event(String info, String start, String stop, String title, Boolean fullday, Category category) {
+        this.info = info;
+        this.start = start;
+        this.stop = stop;
+        this.title = title;
+        this.fullday = fullday;
+        this.calendarList = new ArrayList<>();
+        this.category = category;
     }
+
+
     
     public Event(Integer id) {
         this.id = id;

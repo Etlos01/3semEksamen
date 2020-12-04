@@ -1,4 +1,5 @@
-export const Site = "https://maximapps.com/tomcat/calendar/api/"; 
+export const SiteDeployed = "https://maximapps.com/tomcat/calendar/api/";
+export const Site = "http://localhost:8080/calendar/api/";
 
 export const AdminUrlUserCount = Site + "admin/userCount";
 
