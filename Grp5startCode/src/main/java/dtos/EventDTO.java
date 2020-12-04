@@ -17,36 +17,48 @@ import java.util.List;
  */
 public class EventDTO {
     
+    private int id;
     private String title;
     private String startDate;
     private String endDate;
     private String info;
     private String category;
-    private Boolean isAllDay;
+    private Boolean fullday;
     private List<EventDTO> allEvents = new ArrayList();
 
-    public EventDTO(String title, String startDate, String endDate, String info, String category, Boolean isAllDay) {
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.info = info;
-        this.category = category;
-        this.isAllDay = isAllDay;
-    }
+//    public EventDTO(String title, String startDate, String endDate, String info, String category, Boolean fullday) {
+//        this.title = title;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.info = info;
+//        this.category = category;
+//        this.fullday = fullday;
+//    }
+    
+    
     
     public EventDTO(Event e){
+        this.id = e.getId();
         this.title = e.getTitle();
         this.startDate = e.getStart();
         this.endDate = e.getStop();
         this.info = e.getInfo();
         this.category = e.getCategory().getName();
-        this.isAllDay = e.getFullday();
+        this.fullday = e.getFullday();
     }
 
     public EventDTO(List<Event> eventList){
         eventList.forEach((e) -> {
             allEvents.add(new EventDTO(e));
         });
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getTitle() {
@@ -89,12 +101,12 @@ public class EventDTO {
         this.category = category;
     }
 
-    public Boolean getIsAllDay() {
-        return isAllDay;
+    public Boolean getFullday() {
+        return fullday;
     }
 
-    public void setIsAllDay(Boolean isAllDay) {
-        this.isAllDay = isAllDay;
+    public void setFullday(Boolean fullday) {
+        this.fullday = fullday;
     }
     
     

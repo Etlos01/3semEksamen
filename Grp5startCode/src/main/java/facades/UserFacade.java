@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.UserDTO;
+import entities.Calendar;
 import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
@@ -46,8 +47,14 @@ public class UserFacade {
         EntityManager em = emf.createEntityManager();
         User user = new User(u.getFname(),u.getPassword());
         user.addRole(new Role("user"));
+        
+        Calendar calendar = new Calendar();
+        calendar.setTitle("Default");
+        user.addCalendar(calendar);
+        
         try {
         em.getTransaction().begin();
+        em.persist(calendar);
         em.persist(user);
         em.getTransaction().commit();    
         } catch (Exception e) {

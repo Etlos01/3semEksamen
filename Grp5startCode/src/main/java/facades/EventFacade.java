@@ -8,6 +8,7 @@ package facades;
 import dtos.EventDTO;
 import entities.Category;
 import entities.Event;
+import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -37,24 +38,27 @@ public class EventFacade {
         return instance;
     }
 
-    public EventDTO addEvent(EventDTO e) {
+    public EventDTO addEvent(EventDTO e, String userName) {
         EntityManager em = emf.createEntityManager();
         //Finder category object i databasen ud fra category string i EventDTO e
+        User user = em.find(User.class, userName);
         Category category = em.find(Category.class, e.getCategory());
-        Event event = new Event(e, category);
-        try{
-        em.getTransaction().begin();
-        em.persist(event);
-        em.getTransaction().commit();
+
+        Event event = new Event(e.getInfo(), e.getStartDate(), e.getEndDate(), e.getTitle(), e.getFullday(), category);
+        user.getCalendarList().get(0).addEvent(event);
+        try {
+            em.getTransaction().begin();
+            em.persist(event);
+            em.getTransaction().commit();
         } catch (Exception error) {
-            
-        } finally{
+
+        } finally {
             em.close();
         }
         EventDTO newE = new EventDTO(event);
-        
+
         return newE;
-        
+
     }
 
     public EventDTO getEventsByCalendar(int calendarId) {
