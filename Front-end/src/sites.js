@@ -13,3 +13,6 @@ export const AddUserURL = Site + "user";
 export const HolidayURL = Site + "holidays/all";
 
 export const EventURL = Site + "event";
+
+export const getEventURL = Site + "event/getallevents"
+

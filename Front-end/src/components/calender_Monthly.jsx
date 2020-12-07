@@ -7,13 +7,15 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { Holidays } from "./holiday_component/holidays";
+import { Event } from "./event_components/event_fetcher"
 
 
 
 export default function Month() {
   let holiday_array = Holidays();
 
-  
+ let appointments_array = Event();
+ console.log("array",appointments_array)
   const appointments = [
     {
       endDate: "2020-12-31T24:00",
@@ -27,7 +29,7 @@ export default function Month() {
   return (
     <>
       <Paper>
-        <Scheduler data={holiday_array}>
+        <Scheduler data={appointments_array}>
           <ViewState currentDate={new Date()} />
           <MonthView />
           <Appointments />
