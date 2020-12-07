@@ -9,6 +9,8 @@ import dtos.EventDTO;
 import entities.Category;
 import entities.Event;
 import entities.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -59,6 +61,19 @@ public class EventFacade {
 
         return newE;
 
+    }
+    
+    public List<EventDTO> getEvents (String userName) {
+        List<EventDTO> eventDTOList = new ArrayList<>();
+        
+        EntityManager em = emf.createEntityManager();
+        User user = em.find(User.class, userName);
+        List<Event> eventList = user.getCalendarList().get(0).getEventList();
+        
+        for (Event event : eventList) {
+            eventDTOList.add(new EventDTO(event));
+        }
+        return eventDTOList;
     }
 
     public EventDTO getEventsByCalendar(int calendarId) {

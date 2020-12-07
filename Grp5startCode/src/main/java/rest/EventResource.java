@@ -94,5 +94,16 @@ public class EventResource {
 
         return GSON.toJson(newEvent);
     }
+    
+    
+    @GET
+    @RolesAllowed("user")
+    @Path("/getallevents")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getEvents(){
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return GSON.toJson(FACADE.getEvents(thisUser));
+    }
+    
 
 }
