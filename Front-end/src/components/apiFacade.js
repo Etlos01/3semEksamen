@@ -58,7 +58,7 @@ function ApiFacade() {
     }
 
     const addEvent = (title, startDate, endDate, allDay, category, info) => {
-    const options = makeOptions("POST", true, { title: title, startDate: startDate, endDate: endDate, category: category, info: info ,fullday: allDay })
+    const options = makeOptions("POST", true, { title: title, startDate: startDate, endDate: endDate, category: category ,fullday: allDay })
     return fetch(EventURL, options);
 }
     const addUser = (user, password) => {

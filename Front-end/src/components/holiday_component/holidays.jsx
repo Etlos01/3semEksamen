@@ -6,6 +6,8 @@ import { HolidayURL } from "./../../sites";
 
 
  const url = HolidayURL;
+
+
 function DateAndName(holiday){
   const DateAndNames = holiday.map((data) => {
      const newObject = { title: ''+data.localName+'', startDate : ''+data.date+'T22:00', endDate: ''+data.date+'T24:00'};
@@ -14,10 +16,13 @@ function DateAndName(holiday){
   return DateAndNames;
 }
 
-export function Holidays(){
- const [holiday, setHoliday] = useState();
+ 
+ export function Holidays(){
+ 
+
+const [holiday, setHoliday] = useState([]);
 useEffect(() => {
-  fetch(url)
+   fetch(url)
     .then((res) => res.json())
     .then((data) => {
         setHoliday(DateAndName(data.allHolidays));
