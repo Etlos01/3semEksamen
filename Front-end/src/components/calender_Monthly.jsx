@@ -33,7 +33,7 @@ function Arrays() {
 
 export default function Month() {
   const data = Arrays();
-  console.log(data);
+
 
   const appointments = [
     {
