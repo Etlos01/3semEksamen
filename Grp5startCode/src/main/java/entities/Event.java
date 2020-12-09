@@ -74,7 +74,7 @@ public class Event implements Serializable {
         this.category = category;
     }
 
-
+   
     
     public Event(Integer id) {
         this.id = id;

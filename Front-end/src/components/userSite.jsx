@@ -1,6 +1,6 @@
 import React from "react";
 import Calendermonthly from './calender_Monthly';
-import Picker from './calender_components/datePicker'
+//import Picker from './calender_components/datePicker'
 /*<p>
 Her skal der vises en kalender.
 <br/> husk:
@@ -15,9 +15,7 @@ const UserSite = () => {
     <>
     
     <br/>
-        <Picker/>
-        <br/>
-        <br/>
+  
       <Calendermonthly/>
     </>
   );

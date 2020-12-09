@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
@@ -16,6 +16,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { Holidays } from "./holiday_component/holiday_fetcher";
 import { Event } from "./event_components/event_fetcher";
+import Picker from './calender_components/datePicker'
 
 
 function Arrays() {
@@ -33,6 +34,7 @@ function Arrays() {
 }
 
 export default function Month() {
+  
   const data = Arrays();
 
 
@@ -59,6 +61,7 @@ export default function Month() {
   );
   return (
     <>
+        <Picker/>
       <Paper>
         <Scheduler data={data} height={650}>
           <ViewState

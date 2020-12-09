@@ -43,10 +43,20 @@ public class EventDTO {
         this.startDate = e.getStart();
         this.endDate = e.getStop();
         this.info = e.getInfo();
-        this.category = e.getCategory().getName();
+        this.category = CheckCategory(e);
         this.fullday = e.getFullday();
     }
-
+    
+    
+    
+     public String CheckCategory(Event e){
+         if (e.getCategory() == null) {
+             return "";
+         }else{
+             return e.getCategory().getName();
+         }
+    }
+    
     public EventDTO(List<Event> eventList){
         eventList.forEach((e) -> {
             allEvents.add(new EventDTO(e));
