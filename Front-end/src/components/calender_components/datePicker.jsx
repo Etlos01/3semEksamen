@@ -1,11 +1,13 @@
 import "date-fns";
 import { useState } from "react";
+
 import { DateTimePicker } from "@material-ui/pickers";
 import "react-datepicker/dist/react-datepicker.css";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col} from "react-bootstrap";
 import facade from "./../apiFacade";
+import { Categories } from "./../categories_components/category_fetcher"
 function thisDate(d) {
   return (
     d.getFullYear() +
@@ -30,15 +32,22 @@ function allDay(startDate, endDate){
 
 }
 
+function CheckIfPopulated(){
+  let category;
+  if (!category === undefined) {
+    return category;
+  }
+  else return category = Categories();
+}
+
 export default function MyDatepicker() {
   const today = new Date();
-
   const initialValue = {
     title: "",
     startDate: "",
     endDate: "",
     allDay: "",
-    category: "Vacation"
+    category: ""
   };
   const [date, setDate] = useState(initialValue);
 
@@ -72,15 +81,31 @@ export default function MyDatepicker() {
     window.alert(JSON.stringify(date));
     facade.addEvent(date.title,date.startDate, date.endDate, date.allDay, date.category);
   }
+  
+  const category = CheckIfPopulated();
+
+
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      
+       
             <Form onSubmit={handleSubmit}>
+            <Form.Label>Category</Form.Label>
+           <Form.Control as="select" id="category" onChange={handleChange}>
+            <option id="">  </option>
+         {category.map((time) => {
+           return (
+             
+             <option key={time.categorie} > {time.categorie} </option>
+           )
+         })}
+    </Form.Control>
         <Form.Group>
           <Form.Label>All Day</Form.Label>
           <Form.Check id="allDay" type="checkbox" onChange={handleChange}/>
         </Form.Group>
+        <Form.Row className="align-items-center">
+        <Col xs={3}>
           <DateTimePicker
             value={startDate}
             disablePast
@@ -90,6 +115,8 @@ export default function MyDatepicker() {
             showTodayButton
             id="startDate"
           />
+          </Col>
+          <Col>
           <DateTimePicker
             value={endDate}
             disablePast
@@ -99,7 +126,8 @@ export default function MyDatepicker() {
             id="endDate"
             showTodayButton
           />
-       
+          </Col>
+       </Form.Row>
       
         <Form.Group>
           <Form.Label>Title</Form.Label>

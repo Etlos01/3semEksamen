@@ -14,7 +14,7 @@ import {
   AllDayPanel,
   CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { Holidays } from "./holiday_component/holidays";
+import { Holidays } from "./holiday_component/holiday_fetcher";
 import { Event } from "./event_components/event_fetcher";
 
 
@@ -22,6 +22,7 @@ function Arrays() {
   const holiday_array = Holidays();
 
   const appointment_array = Event();
+
 
   if (holiday_array === undefined && appointment_array === undefined) {
     console.log("loading");
@@ -33,6 +34,7 @@ function Arrays() {
 
 export default function Month() {
   const data = Arrays();
+
 
 
   const appointments = [

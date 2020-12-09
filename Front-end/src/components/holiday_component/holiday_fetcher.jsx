@@ -1,5 +1,5 @@
 import { useEffect ,useState } from "react";
-import { HolidayURL } from "./../../sites";
+import { HolidayURL } from "../../sites";
 
 
 
