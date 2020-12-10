@@ -14,30 +14,10 @@ import {
   AllDayPanel,
   CurrentTimeIndicator,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { Holidays } from "./holiday_component/holiday_fetcher";
-import { Event } from "./event_components/event_fetcher";
-import Picker from './calender_components/datePicker'
+import Picker from "./calender_components/datePicker";
 
-
-function Arrays() {
-  const holiday_array = Holidays();
-
-  const appointment_array = Event();
-
-
-  if (holiday_array === undefined && appointment_array === undefined) {
-    console.log("loading");
-  } else {
-    const data = holiday_array.concat(appointment_array);
-    return data;
-  }
-}
-
-export default function Month() {
-  
-  const data = Arrays();
-
-
+export default function Month(props) {
+  const data = props.events;
 
   const appointments = [
     {
@@ -61,7 +41,6 @@ export default function Month() {
   );
   return (
     <>
-        <Picker/>
       <Paper>
         <Scheduler data={data} height={650}>
           <ViewState
