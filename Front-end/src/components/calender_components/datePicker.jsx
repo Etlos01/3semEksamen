@@ -40,7 +40,7 @@ function CheckIfPopulated(){
   else return category = Categories();
 }
 
-export default function MyDatepicker() {
+export default function MyDatepicker(props) {
   const today = new Date();
   const initialValue = {
     title: "",
@@ -80,6 +80,7 @@ export default function MyDatepicker() {
     event.preventDefault();
     window.alert(JSON.stringify(date));
     facade.addEvent(date.title,date.startDate, date.endDate, date.allDay, date.category);
+    
   }
   
   const category = CheckIfPopulated();

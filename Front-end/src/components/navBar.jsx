@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
 import Login from "./login";
-import DailyFun from "./dailyFun";
 import Home from "./home";
 import facade from "./apiFacade";
 import ValidateRoleSite from "./validateRoleSite";
