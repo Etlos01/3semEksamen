@@ -23,6 +23,7 @@ function thisDate(d) {
   );
 }
 function allDay(startDate, endDate) {
+  
   const startDay =
     ("0" + startDate.getDate()).slice(-2) +
     ("0" + (startDate.getMonth() + 1)).slice(-2);
@@ -34,6 +35,17 @@ function allDay(startDate, endDate) {
   } else {
     return true;
   }
+}
+function checkDates(startDate, endDate){
+  const newStartDate = ""+(startDate.getMonth()+1)+startDate.getDate()+startDate.getHours()+startDate.getMinutes();
+  const newEndDate = ""+(endDate.getMonth()+1)+endDate.getDate()+endDate.getHours()+endDate.getMinutes();
+
+  //const startDay = {day: Number(startDate.getDate()), month: Number((startDate.getMonth() + 1))}
+  //const endDay = {day: Number(endDate.getDate()), month: Number((endDate.getMonth() + 1))}
+
+ if(Number(newEndDate) >= Number(newStartDate)){
+   return true;
+ }
 }
 
 function CheckIfPopulated() {
@@ -52,14 +64,13 @@ export default function MyDatepicker(props) {
     allDay: "",
     category: "",
   };
-  const [date, setDate] = useState(initialValue);
+   const [date, setDate] = useState(initialValue);
 
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
   const startingDate = thisDate(startDate);
   const endingDate = thisDate(endDate);
-
-  const handleChange = (event) => {
+  const handleChange = (event) => { 
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.id;
@@ -67,9 +78,9 @@ export default function MyDatepicker(props) {
       setDate({
         ...date,
         [name]: value,
-        startDate: startingDate,
-        endDate: endingDate,
-        allDay: allDay(startDate, endDate),
+       startDate: startingDate,
+       endDate: endingDate,
+       allDay: allDay(startDate, endDate),
       });
     } else {
       setDate({
@@ -83,7 +94,8 @@ export default function MyDatepicker(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //window.alert(JSON.stringify(date));
+  
+    if (checkDates(startDate, endDate)) {
     facade.addEvent(
       date.title,
       date.startDate,
@@ -100,6 +112,9 @@ export default function MyDatepicker(props) {
     };
     props.setNewEvent(newEvent);
     //setDate(initialValue);
+  }else{
+    alert("Slut dato er større end start dato")
+  }
   };
 
   const category = CheckIfPopulated();
@@ -118,8 +133,8 @@ export default function MyDatepicker(props) {
           <Form.Group>
             <Form.Label>All Day</Form.Label>
             <Form.Check id="allDay" type="checkbox" onChange={handleChange} />
-          </Form.Group>
-          <Form.Row className="align-items-center">
+          </Form.Group >
+          <Form.Row className="align-items-center" >
             <Col xs={3}>
               <DateTimePicker
                 value={startDate}
@@ -129,6 +144,7 @@ export default function MyDatepicker(props) {
                 label="Start Date"
                 showTodayButton
                 id="startDate"
+                
               />
             </Col>
             <Col>
@@ -139,7 +155,8 @@ export default function MyDatepicker(props) {
                 onChange={setEndDate}
                 label="End Date"
                 id="endDate"
-                showTodayButton
+                showTodayButton 
+                
               />
             </Col>
           </Form.Row>
