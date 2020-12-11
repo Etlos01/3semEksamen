@@ -34,15 +34,15 @@ const UserSite = () => {
     category: "",
   };
 
-  const [newEvent, setNewEvent] = useState([initialValue]);
+  const [newEvent, setNewEvent] = useState(initialValue);
   console.log(newEvent);
 
   const data = Arrays();
   console.log(data);
-  if (newEvent === [initialValue]) {
+  if (newEvent === initialValue) {
     console.log("Et eller andet");
   } else {
-    data.concat(newEvent);
+    data.push(newEvent);
   }
   //}
   return (
